@@ -1,0 +1,1202 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVARE | Grow. Connect. Elevate.</title>
+    
+    <!-- Fonts: Space Grotesk (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN for single file requirement) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        elevare: {
+                            navy: '#203858',
+                            mid: '#5880B0',
+                            sky: '#A0D8F8',
+                            teal: '#386068',
+                            gray: '#B8B8B8',
+                            light: '#F7FAFF',
+                            dark: '#070B14',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'blob': 'blob 7s infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #070B14; /* Default Dark */
+            color: #F7FAFF;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light {
+            background-color: #F7FAFF;
+            color: #070B14;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(7, 11, 20, 0.1);
+        }
+
+        .glass-nav {
+            background: rgba(7, 11, 20, 0.7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .light .glass-nav {
+            background: rgba(247, 250, 255, 0.9);
+            border-bottom: 1px solid rgba(7, 11, 20, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #A0D8F8, #5880B0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-secondary {
+            background: linear-gradient(to right, #ffffff, #B8B8B8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .light .text-gradient-secondary {
+            background: linear-gradient(to right, #070B14, #386068);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Eagle Watermark Pattern */
+        .eagle-bg {
+            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M10 50 Q 50 10 90 50" stroke="%23203858" stroke-width="2" fill="none" opacity="0.1"/%3E%3C/svg%3E');
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+        }
+
+        /* Noise Texture - Reduced for 3D effect visibility */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.01;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            transition: opacity 0.3s ease;
+        }
+
+        .light .noise {
+            opacity: 0.005;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070B14;
+            transition: background 0.3s ease;
+        }
+        .light ::-webkit-scrollbar-track {
+            background: #F7FAFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #386068;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5880B0;
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 30px -5px rgba(160, 216, 248, 0.2);
+        }
+
+        .light .glow-hover:hover {
+            box-shadow: 0 0 30px -5px rgba(88, 128, 176, 0.3);
+        }
+        
+        /* Details/Summary animation */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .light .theme-toggle {
+            background: rgba(7, 11, 20, 0.1);
+            border: 1px solid rgba(7, 11, 20, 0.2);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .light .theme-toggle:hover {
+            background: rgba(7, 11, 20, 0.2);
+        }
+
+        /* Light mode text color adjustments */
+        .light .text-white {
+            color: #070B14 !important;
+        }
+
+        .light .text-elevare-gray {
+            color: #386068 !important;
+        }
+
+        .light section {
+            background-color: #F7FAFF !important;
+        }
+
+        .light .bg-elevare-dark {
+            background-color: #F7FAFF !important;
+        }
+
+        .light .bg-\[#090E1A\] {
+            background-color: #F0F4F9 !important;
+        }
+
+        .light .bg-\[#080C16\] {
+            background-color: #F0F4F9 !important;
+        }
+
+        .light .border-white\/5 {
+            border-color: rgba(7, 11, 20, 0.1) !important;
+        }
+
+        .light .border-white\/10 {
+            border-color: rgba(7, 11, 20, 0.15) !important;
+        }
+
+        .light .border-white\/20 {
+            border-color: rgba(7, 11, 20, 0.2) !important;
+        }
+
+        .light .bg-white\/5 {
+            background-color: rgba(7, 11, 20, 0.03) !important;
+        }
+
+        .light .bg-white\/10 {
+            background-color: rgba(7, 11, 20, 0.05) !important;
+        }
+
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 1px solid rgba(7, 11, 20, 0.1) !important;
+        }
+
+        .light nav {
+            background: rgba(247, 250, 255, 0.9) !important;
+            border-bottom: 1px solid rgba(7, 11, 20, 0.1) !important;
+        }
+
+        /* Light mode for radial gradient backgrounds */
+        .light .bg-\[radial-gradient\(circle_at_center\,_var\(--tw-gradient-stops\)\)\] {
+            background: radial-gradient(circle at center, rgba(160, 216, 248, 0.2), #F7FAFF 70%) !important;
+        }
+        
+        .light .absolute.inset-0.bg-\[radial-gradient\(circle_at_50\%_-20\%\,_#203858_0\%\,_#070B14_60\%\)\] {
+             background: radial-gradient(circle at 50% -20%, #A0D8F8 0%, #F7FAFF 60%) !important;
+             opacity: 0.5;
+        }
+
+        /* Timeline light mode adjustments */
+        .light #how .bg-elevare-dark {
+            background-color: #F7FAFF;
+        }
+
+        .light #how .w-0\.5 {
+            background: linear-gradient(to bottom, rgba(88, 128, 176, 0.3), rgba(56, 96, 104, 0.3), rgba(88, 128, 176, 0.3));
+        }
+
+        .light #how .ring-elevare-dark\/50 {
+            --tw-ring-color: rgba(247, 250, 255, 0.5);
+        }
+
+        /* --- AI Text Reveal Animation System (VelvetSound Inspired) --- */
+        :root {
+            --ease-ai: cubic-bezier(0.22, 1, 0.36, 1);
+            --delay-base: 0.03s;
+        }
+
+        /* Wrapper for stability */
+        .ai-content { 
+            display: inline-block; 
+            opacity: 1; 
+        }
+
+        /* Char/Word Initial State - Blur Effect */
+        .ai-char, .ai-word {
+            opacity: 0;
+            display: inline-block;
+            white-space: pre;
+            will-change: transform, opacity, filter;
+            transform: translateY(30px);
+            filter: blur(8px);
+        }
+
+        /* Gradient text - animate as whole element */
+        .text-gradient {
+            background: linear-gradient(to right, #A0D8F8, #5880B0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Gradient text animation - fade in as whole */
+        .text-gradient.ai-content {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(8px);
+        }
+
+        .text-gradient.ai-active {
+            animation: animationIn 1s var(--ease-ai) forwards;
+        }
+
+        /* Activation */
+        .ai-active .ai-char,
+        .ai-active .ai-word {
+            animation: animationIn 0.8s var(--ease-ai) forwards;
+            animation-delay: calc(var(--ai-index) * var(--delay-base));
+        }
+
+        /* Slow down headings for dramatic effect */
+        h1 .ai-char, h2 .ai-char {
+            --delay-base: 0.04s;
+            animation-duration: 1s;
+        }
+
+        /* The animationIn Keyframes */
+        @keyframes animationIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+        }
+
+        /* General Fade Up for Blocks */
+        .fade-up-block {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(5px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.8s ease-out;
+        }
+
+        .ai-active.fade-up-block {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Section Numbers (VelvetSound Style) */
+        .section-number {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 12rem;
+            line-height: 1;
+            color: rgba(160, 216, 248, 0.03);
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+        }
+
+        .light .section-number {
+            color: rgba(32, 56, 88, 0.05);
+        }
+
+        /* Hover Interaction */
+        .ai-hover-target {
+            transition: letter-spacing 0.3s var(--ease-ai), opacity 0.3s ease;
+        }
+
+        .ai-hover-target:hover {
+            letter-spacing: 0.02em;
+            opacity: 0.9;
+        }
+
+        /* Grid Lines (VelvetSound Effect) */
+        .grid-lines {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            max-width: 80rem;
+            margin: 0 auto;
+            pointer-events: none;
+            z-index: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            opacity: 0.4;
+        }
+
+        .grid-line { 
+            width: 1px; 
+            height: 100%; 
+            background-color: rgba(160, 216, 248, 0.08); 
+        }
+
+        .light .grid-line {
+            background-color: rgba(32, 56, 88, 0.15);
+        }
+
+        /* 3D Background Animation Support */
+        .aura-background-component {
+            filter: hue-rotate(170deg) saturate(1.2);
+        }
+
+        .light .aura-background-component {
+            filter: hue-rotate(170deg) saturate(2) brightness(0.8);
+            opacity: 0.6;
+        }
+
+        /* Parallax Effect */
+        .parallax-effect { 
+            will-change: transform; 
+        }
+    /* Accordion Styles from Market.AI */
+    .accordion-content {
+        transition: max-height 0.4s var(--ease-ai), opacity 0.4s var(--ease-ai);
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+    .accordion-content.open { opacity: 1; }
+    </style>
+</head>
+<body class="relative antialiased selection:bg-elevare-sky/30 selection:text-white">
+
+    <!-- Background (component) added by UnicornStudio - 3D Ring Effect -->
+    <div class="aura-background-component fixed top-0 w-full h-screen hue-rotate-180" data-alpha-mask="80" style="mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent);">
+        <div class="aura-background-component top-0 w-full -z-10 absolute h-full">
+            <div data-us-project="krvLrHX3sj3cg8BHywDj" class="absolute w-full h-full left-0 top-0 -z-10"></div>
+            <script type="text/javascript">
+                !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();
+            </script>
+        </div>
+    </div>
+
+    <!-- Global Grid Lines (VelvetSound Effect) -->
+    <div class="grid-lines">
+        <div class="grid-line"></div>
+        <div class="grid-line hidden md:block"></div>
+        <div class="grid-line hidden md:block"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+    </div>
+
+    <!-- Background Ambience -->
+    <div class="fixed top-0 w-full h-[100vh] pointer-events-none opacity-40 z-0">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,_#203858_0%,_#070B14_60%)]"></div>
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 glass-nav backdrop-blur-md transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo area -->
+            <a href="#" class="flex items-center gap-2 group cursor-pointer">
+                <div class="relative w-10 h-10">
+                    <img src="logo.png" alt="Elevare Logo" class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-300">
+                </div>
+                <span class="ai-observe font-heading font-semibold text-xl tracking-tight text-white group-hover:text-elevare-sky transition-colors ai-hover-target">
+                    elevare<span class="text-elevare-mid">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-elevare-gray">
+                <a href="#tracks" class="ai-observe hover:text-white transition-colors ai-hover-target">Tracks</a>
+                <a href="#how" class="ai-observe hover:text-white transition-colors ai-hover-target">How it works</a>
+                <button id="theme-toggle" class="ai-observe theme-toggle p-2 rounded-full transition-all duration-300 hover:scale-110" aria-label="Toggle theme">
+                    <i data-lucide="sun" class="w-5 h-5 text-elevare-sky hidden dark-icon"></i>
+                    <i data-lucide="moon" class="w-5 h-5 text-elevare-sky hidden light-icon"></i>
+                </button>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-4">
+                <a href="#" class="ai-observe hidden md:block text-sm font-medium hover:text-white text-elevare-gray transition-colors ai-hover-target">Sign In</a>
+                <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="ai-observe bg-elevare-sky hover:bg-elevare-sky/90 text-elevare-dark text-sm font-medium px-5 py-2.5 rounded-full transition-all ai-hover-target">
+                    Join Now
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative pt-36 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Section Number (VelvetSound Effect) -->
+        <div class="section-number top-32 right-6 md:right-12">01</div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+                
+                <!-- Left Content -->
+                <div class="lg:w-7/12 parallax-effect" data-parallax-speed="0.05">
+                    <div class="inline-flex items-center gap-2 border border-elevare-sky/30 bg-elevare-sky/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-8 ai-observe">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-elevare-sky opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-elevare-sky"></span>
+                        </span>
+                        <span class="text-xs font-medium text-white/80 uppercase tracking-wide">ACCEPTING NEW MEMBERS</span>
+                    </div>
+
+                    <h1 class="text-5xl lg:text-7xl font-heading font-medium tracking-tight leading-[1.1] mb-8 text-white">
+                        <span class="ai-observe inline-block">Build. Flex.</span><br>
+                        <span class="text-gradient ai-observe inline-block mt-2">Go Global.</span>
+                    </h1>
+                    <p class="text-lg lg:text-xl text-elevare-gray mb-10 max-w-xl leading-relaxed ai-observe">
+                        Your glow-up isn't a solo mission. Join the community where young founders, builders, and students stop grinding alone and start shipping together.
+                    </p>
+
+                    <!-- Email/CTA Input Group -->
+                    <div class="flex flex-col sm:flex-row gap-3 max-w-md opacity-0 animate-[animationIn_0.8s_1s_forwards] blur-sm filter" style="animation-fill-mode: forwards;">
+                        <input type="email" placeholder="Enter your email address" class="flex-1 bg-white text-elevare-dark placeholder:text-elevare-gray px-4 py-3.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-elevare-sky text-base">
+                        <button class="bg-elevare-sky hover:bg-elevare-sky/90 text-elevare-dark px-8 py-3.5 rounded-lg font-medium transition-all flex items-center justify-center gap-2 text-base ai-hover-target">
+                            <span class="ai-observe">Join Now</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Side Info (With Float Animation) -->
+                <div class="lg:w-4/12 flex flex-col gap-12 border-l border-elevare-navy/30 pl-8 lg:pl-12 py-4 parallax-effect" data-parallax-speed="0.02">
+                    <div class="space-y-6">
+                        <div class="ai-observe">
+                            <h3 class="text-elevare-sky text-sm font-medium mb-2 uppercase tracking-wide">The Network</h3>
+                            <p class="text-elevare-gray text-base leading-relaxed">
+                                Connect with founders and builders who are 2-3 steps ahead. Warm intros only, no cold DMs.
+                            </p>
+                        </div>
+                        <div class="ai-observe">
+                            <h3 class="text-elevare-sky text-sm font-medium mb-2 uppercase tracking-wide">Weekly Drops</h3>
+                            <p class="text-elevare-gray text-base leading-relaxed">
+                                Opportunities, resources, and templates sent straight to your phone. No spam, just value.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 ai-observe animate-float">
+                        <div class="flex items-center justify-center w-10 h-10 bg-elevare-navy/50 rounded-full border border-elevare-mid/30 text-elevare-sky"><i data-lucide="users" class="w-5 h-5"></i></div>
+                        <div class="flex items-center justify-center w-10 h-10 bg-elevare-navy/50 rounded-full border border-elevare-mid/30 text-elevare-sky"><i data-lucide="briefcase" class="w-5 h-5"></i></div>
+                        <div class="flex items-center justify-center w-10 h-10 bg-elevare-navy/50 rounded-full border border-elevare-mid/30 text-elevare-sky"><i data-lucide="rocket" class="w-5 h-5"></i></div>
+                        <div class="flex items-center justify-center w-10 h-10 bg-elevare-navy/50 rounded-full border border-elevare-mid/30 text-elevare-sky"><i data-lucide="globe-2" class="w-5 h-5"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. WHY THIS EXISTS -->
+    <section class="py-24 relative bg-elevare-dark">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="font-heading font-medium text-3xl md:text-5xl tracking-tight mb-8">
+                Because doing it <span class="text-elevare-mid italic">alone</span> is mid.
+            </h2>
+            <div class="space-y-6 text-lg text-elevare-gray font-light">
+                <p>
+                    You’re trying to build a portfolio, land that internship, or start a company. 
+                    But you’re stuck scrolling LinkedIn, confused by conflicting advice, and 
+                    sending DMs that get left on read.
+                </p>
+                <p class="text-white font-normal text-xl">
+                    That’s not the vibe. Elevare is your cheat code.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Animated Connector Line -->
+        <div class="hidden md:block absolute left-1/2 h-24 w-[1px] bg-gradient-to-b from-transparent via-elevare-sky/50 to-transparent -bottom-12"></div>
+    </section>
+
+    <!-- 3. WHAT YOU UNLOCK (GRID) -->
+    <section class="py-24 bg-[#090E1A]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div>
+                    <span class="text-elevare-sky text-xs font-semibold tracking-wider uppercase mb-2 block">The Inventory</span>
+                    <h2 class="font-heading font-medium text-4xl tracking-tight text-white">What You Unlock</h2>
+                </div>
+                <div class="text-elevare-gray text-sm max-w-xs text-right md:text-left">
+                    Think of these as power-ups for your career. <br>Available exclusively in the group.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-elevare-navy/50 rounded-lg flex items-center justify-center mb-6 text-elevare-sky group-hover:scale-110 transition-transform">
+                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading font-medium text-xl text-white mb-2">Freelance Gigs</h3>
+                    <p class="text-elevare-gray text-sm mb-4 leading-relaxed">Real paid projects dropped directly into the chat. No bidding wars on freelance sites.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-elevare-gray">Verified clients</span>
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="text-elevare-sky text-xs font-medium hover:underline">Get Access →</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-elevare-navy/50 rounded-lg flex items-center justify-center mb-6 text-elevare-sky group-hover:scale-110 transition-transform">
+                        <i data-lucide="globe-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading font-medium text-xl text-white mb-2">Global Access</h3>
+                    <p class="text-elevare-gray text-sm mb-4 leading-relaxed">Study abroad cheatsheets, Ivy League application reviews, and travel hacks.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-elevare-gray">Harvard/MIT mentors</span>
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="text-elevare-sky text-xs font-medium hover:underline">Get Access →</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-elevare-navy/50 rounded-lg flex items-center justify-center mb-6 text-elevare-sky group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading font-medium text-xl text-white mb-2">The Network</h3>
+                    <p class="text-elevare-gray text-sm mb-4 leading-relaxed">Intros to founders and builders who are 2-3 steps ahead of you.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-elevare-gray">Warm intros only</span>
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="text-elevare-sky text-xs font-medium hover:underline">Get Access →</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-elevare-navy/50 rounded-lg flex items-center justify-center mb-6 text-elevare-sky group-hover:scale-110 transition-transform">
+                        <i data-lucide="rocket" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading font-medium text-xl text-white mb-2">Startup Culture</h3>
+                    <p class="text-elevare-gray text-sm mb-4 leading-relaxed">Pitch feedback, MVP mindset workshops, and co-founder matching.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-elevare-gray">From 0 to 1</span>
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="text-elevare-sky text-xs font-medium hover:underline">Get Access →</a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-elevare-navy/50 rounded-lg flex items-center justify-center mb-6 text-elevare-sky group-hover:scale-110 transition-transform">
+                        <i data-lucide="download" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading font-medium text-xl text-white mb-2">Resources</h3>
+                    <p class="text-elevare-gray text-sm mb-4 leading-relaxed">We drop templates, legal contracts, and Figma files you can steal (legally).</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-elevare-gray">Yes, free.</span>
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="text-elevare-sky text-xs font-medium hover:underline">Get Access →</a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-gradient-to-br from-elevare-navy to-elevare-dark border border-elevare-mid/30 p-8 rounded-2xl transition-all duration-300 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i data-lucide="eagle" class="w-24 h-24 text-white"></i>
+                    </div>
+                    <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading font-medium text-xl text-white mb-2">The Culture</h3>
+                    <p class="text-elevare-gray text-sm mb-4 leading-relaxed">Weekly circles, accountability buddies, and off-topic banter.</p>
+                    <div class="flex items-center justify-between mt-auto relative z-10">
+                        <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-elevare-gray">Vibe check passed</span>
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="text-white font-medium hover:underline">Join Now →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. HOW IT WORKS (TIMELINE) -->
+    <section id="how" class="py-24 relative overflow-hidden bg-elevare-dark">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-elevare-sky text-xs font-semibold tracking-wider uppercase mb-2 block">THE QUEST LOG</span>
+                <h2 class="font-heading font-medium text-4xl md:text-5xl tracking-tight text-white">How to Level Up</h2>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical Timeline Line -->
+                <div class="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-elevare-sky/50 via-elevare-mid/50 to-elevare-sky/50"></div>
+
+                <div class="space-y-16 md:space-y-20">
+                    <!-- Step 1 -->
+                    <div class="relative flex flex-col md:flex-row md:items-center gap-6 group">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-elevare-sky ring-4 ring-elevare-navy/50 md:ring-elevare-dark/50 group-hover:scale-125 transition-all z-10"></div>
+                        
+                        <!-- Content Left -->
+                        <div class="md:w-1/2 md:pr-12 md:text-right pl-16 md:pl-0">
+                            <h3 class="text-2xl md:text-3xl text-white font-heading font-medium mb-2">Join WhatsApp</h3>
+                            <p class="text-sm md:text-base text-elevare-gray leading-relaxed">Click the button. It takes 2 seconds. No lengthy forms.</p>
+                        </div>
+                        
+                        <!-- Icon Right -->
+                        <div class="md:w-1/2 md:pl-12 pl-16 md:pl-12">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-elevare-sky/10 flex items-center justify-center group-hover:bg-elevare-sky/20 transition-all">
+                                <i data-lucide="user-plus" class="w-6 h-6 md:w-7 md:h-7 text-elevare-sky"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative flex flex-col md:flex-row-reverse md:items-center gap-6 group">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-elevare-mid ring-4 ring-elevare-navy/50 md:ring-elevare-dark/50 group-hover:scale-125 transition-all z-10"></div>
+                        
+                        <!-- Content Right -->
+                        <div class="md:w-1/2 md:pl-12 md:text-left pl-16 md:pl-12">
+                            <h3 class="text-2xl md:text-3xl text-white font-heading font-medium mb-2">Pick a Track</h3>
+                            <p class="text-sm md:text-base text-elevare-gray leading-relaxed">Founder? Freelancer? Student? Select your role in the group intro.</p>
+                        </div>
+                        
+                        <!-- Icon Left -->
+                        <div class="md:w-1/2 md:pr-12 md:flex md:justify-end pl-16 md:pl-0">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-elevare-mid/10 flex items-center justify-center group-hover:bg-elevare-mid/20 transition-all">
+                                <i data-lucide="layers" class="w-6 h-6 md:w-7 md:h-7 text-elevare-mid"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative flex flex-col md:flex-row md:items-center gap-6 group">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-elevare-sky ring-4 ring-elevare-navy/50 md:ring-elevare-dark/50 group-hover:scale-125 transition-all z-10"></div>
+                        
+                        <!-- Content Left -->
+                        <div class="md:w-1/2 md:pr-12 md:text-right pl-16 md:pl-0">
+                            <h3 class="text-2xl md:text-3xl text-white font-heading font-medium mb-2">Get Weekly Drops</h3>
+                            <p class="text-sm md:text-base text-elevare-gray leading-relaxed">Opportunities and resources sent straight to your phone.</p>
+                        </div>
+                        
+                        <!-- Icon Right -->
+                        <div class="md:w-1/2 md:pl-12 pl-16 md:pl-12">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-elevare-sky/10 flex items-center justify-center group-hover:bg-elevare-sky/20 transition-all">
+                                <i data-lucide="gift" class="w-6 h-6 md:w-7 md:h-7 text-elevare-sky"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. TRACKS (CLASSES) -->
+    <section id="tracks" class="py-24 bg-[#080C16]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-medium text-4xl tracking-tight text-white mb-4">Choose Your Character</h2>
+                <p class="text-elevare-gray">Which path are you taking? (You can mix and match)</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Track 1 -->
+                <div class="group glass-card p-1 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="mb-4 inline-block bg-blue-900/30 text-blue-300 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">The Contractor</div>
+                        <h3 class="text-xl text-white font-heading font-medium mb-2">Freelance Track</h3>
+                        <p class="text-xs text-elevare-gray mb-6">Best for: Designers, Devs, Writers wanting cash flow.</p>
+                        
+                        <ul class="text-sm text-gray-400 space-y-2 mb-8 flex-grow">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Client referrals</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Pricing templates</li>
+                        </ul>
+                        
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="w-full block text-center py-2 rounded-lg border border-white/10 text-xs text-white hover:bg-white hover:text-black transition-colors">Select Track</a>
+                    </div>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="group glass-card p-1 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="mb-4 inline-block bg-purple-900/30 text-purple-300 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">The Ivy Hunter</div>
+                        <h3 class="text-xl text-white font-heading font-medium mb-2">Global Track</h3>
+                        <p class="text-xs text-elevare-gray mb-6">Best for: Students aiming for Top 20 unis or abroad.</p>
+                        
+                        <ul class="text-sm text-gray-400 space-y-2 mb-8 flex-grow">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Essay reviews</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Alumni AMAs</li>
+                        </ul>
+                        
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="w-full block text-center py-2 rounded-lg border border-white/10 text-xs text-white hover:bg-white hover:text-black transition-colors">Select Track</a>
+                    </div>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="group glass-card p-1 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="mb-4 inline-block bg-orange-900/30 text-orange-300 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">The Builder</div>
+                        <h3 class="text-xl text-white font-heading font-medium mb-2">Startup Track</h3>
+                        <p class="text-xs text-elevare-gray mb-6">Best for: Visionaries building MVP or raising pre-seed.</p>
+                        
+                        <ul class="text-sm text-gray-400 space-y-2 mb-8 flex-grow">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Pitch decks</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Co-founder dates</li>
+                        </ul>
+                        
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="w-full block text-center py-2 rounded-lg border border-white/10 text-xs text-white hover:bg-white hover:text-black transition-colors">Select Track</a>
+                    </div>
+                </div>
+
+                <!-- Track 4 -->
+                <div class="group glass-card p-1 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="mb-4 inline-block bg-green-900/30 text-green-300 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">The Connector</div>
+                        <h3 class="text-xl text-white font-heading font-medium mb-2">Network Track</h3>
+                        <p class="text-xs text-elevare-gray mb-6">Best for: People who want to know everyone.</p>
+                        
+                        <ul class="text-sm text-gray-400 space-y-2 mb-8 flex-grow">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Event invites</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-elevare-mid"></i> Warm intros</li>
+                        </ul>
+                        
+                        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="w-full block text-center py-2 rounded-lg border border-white/10 text-xs text-white hover:bg-white hover:text-black transition-colors">Select Track</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SOCIAL PROOF (STATS) -->
+    <section class="py-24 border-y border-white/5 bg-elevare-dark/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl md:text-4xl font-heading font-semibold text-white mb-2">100+</div>
+                    <div class="text-xs text-elevare-gray uppercase tracking-widest">Founding Members</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-heading font-semibold text-white mb-2">Weekly</div>
+                    <div class="text-xs text-elevare-gray uppercase tracking-widest">Resource Drops</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-heading font-semibold text-white mb-2">$0</div>
+                    <div class="text-xs text-elevare-gray uppercase tracking-widest">Cost to Join</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-heading font-semibold text-white mb-2">24/7</div>
+                    <div class="text-xs text-elevare-gray uppercase tracking-widest">Community Vibe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section class="py-24 max-w-2xl mx-auto px-6">
+        <h2 class="font-heading font-medium text-3xl text-center mb-12 ai-observe">No 🧢 FAQ</h2>
+        
+        <div class="space-y-4">
+            <!-- FAQ Item 1 -->
+            <div class="bg-white/5 rounded-xl p-4 transition-colors hover:bg-white/10 border border-transparent hover:border-elevare-sky/10">
+                <button class="accordion-btn flex justify-between items-center w-full text-left font-medium text-white group">
+                    <span class="ai-observe">Is this actually free?</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-elevare-gray group-hover:text-elevare-sky transition-transform duration-300 no-process"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="text-elevare-gray text-sm mt-3 leading-relaxed pl-1 ai-observe">
+                        Yes. We're building the best community first. Just bring good vibes and a willingness to build.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="bg-white/5 rounded-xl p-4 transition-colors hover:bg-white/10 border border-transparent hover:border-elevare-sky/10">
+                <button class="accordion-btn flex justify-between items-center w-full text-left font-medium text-white group">
+                    <span class="ai-observe">Will you spam my WhatsApp?</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-elevare-gray group-hover:text-elevare-sky transition-transform duration-300 no-process"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="text-elevare-gray text-sm mt-3 leading-relaxed pl-1 ai-observe">
+                        Never. The group is for value only. Admins moderate strictly. No "good morning" spam allowed.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="bg-white/5 rounded-xl p-4 transition-colors hover:bg-white/10 border border-transparent hover:border-elevare-sky/10">
+                <button class="accordion-btn flex justify-between items-center w-full text-left font-medium text-white group">
+                    <span class="ai-observe">I'm a total beginner. Can I join?</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-elevare-gray group-hover:text-elevare-sky transition-transform duration-300 no-process"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="text-elevare-gray text-sm mt-3 leading-relaxed pl-1 ai-observe">
+                        Absolutely. The best way to learn is to be in the room with people ahead of you. Glow-up starts here.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 4 -->
+            <div class="bg-white/5 rounded-xl p-4 transition-colors hover:bg-white/10 border border-transparent hover:border-elevare-sky/10">
+                <button class="accordion-btn flex justify-between items-center w-full text-left font-medium text-white group">
+                    <span class="ai-observe">How do tracks work?</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-elevare-gray group-hover:text-elevare-sky transition-transform duration-300 no-process"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="text-elevare-gray text-sm mt-3 leading-relaxed pl-1 ai-observe">
+                        Once you're in the WhatsApp community, we have specific sub-groups or "Communities" for each track so you only get notifications for what you care about.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FINAL CTA -->
+    <section class="py-32 relative overflow-hidden text-center">
+        <!-- Background Radial Gradient -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-elevare-navy/40 via-elevare-dark to-elevare-dark z-0"></div>
+        
+        <!-- Eagle Watermark Center -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none">
+             <i data-lucide="eagle" class="w-96 h-96 text-white"></i>
+        </div>
+
+        <div class="relative z-10 px-6">
+            <h2 class="font-heading font-medium text-5xl md:text-7xl tracking-tight mb-8 text-white">
+                Ready to level up?
+            </h2>
+            <div class="flex flex-col items-center gap-4">
+                <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="bg-white text-elevare-dark px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] animate-pulse-slow">
+                    Join WhatsApp Now
+                </a>
+                <a href="#" class="text-elevare-gray text-sm hover:text-white transition-colors mt-4">
+                    Interested in Partnering / Mentoring?
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-white/5 bg-elevare-dark text-center">
+        <div class="flex items-center justify-center gap-2 mb-4 opacity-50 grayscale hover:grayscale-0 transition-all">
+             <!-- Tiny text logo -->
+             <span class="font-heading font-bold text-xl tracking-tight text-white">
+                elevare<span class="text-elevare-mid">.</span>
+            </span>
+        </div>
+        <p class="text-elevare-gray text-xs">
+            © 2024 Elevare Community. Grow • Connect • Elevate.
+        </p>
+    </footer>
+
+    <!-- Sticky Mobile Bottom Bar -->
+    <div class="md:hidden fixed bottom-6 left-6 right-6 z-50 flex gap-3">
+        <button id="theme-toggle-mobile" class="theme-toggle p-3 rounded-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center" aria-label="Toggle theme">
+            <i data-lucide="sun" class="w-5 h-5 text-elevare-sky hidden dark-icon-mobile"></i>
+            <i data-lucide="moon" class="w-5 h-5 text-elevare-sky hidden light-icon-mobile"></i>
+        </button>
+        <a href="https://chat.whatsapp.com/Hi6V8PWTe7M669sIKI7XcL" class="flex items-center justify-center gap-2 flex-1 bg-elevare-sky text-elevare-dark font-bold py-4 rounded-2xl shadow-2xl shadow-sky-900/50 hover:scale-[1.02] active:scale-95 transition-all">
+            <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
+            Join the Group
+        </a>
+    </div>
+
+    <!-- Initialize Lucide Icons & Theme Toggle -->
+    <script>
+        lucide.createIcons();
+
+        /* --- AI Text Reveal Engine (VelvetSound Enhanced) --- */
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const processTextElement = (el) => {
+                // Skip if already processed or has no text
+                if (el.classList.contains('ai-processed') || !el.textContent.trim()) return;
+                
+                // Skip completely if it has the no-process class
+                if (el.classList.contains('no-process')) return;
+                
+                // Check if it's a heading
+                const isHeading = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(el.tagName);
+                
+                // SPECIAL HANDLING FOR ACCORDION BUTTONS
+                if (el.closest('.accordion-btn')) {
+                    // Just wrap text content in spans, don't destroy structure
+                    const text = el.textContent.trim();
+                    el.innerHTML = '';
+                    const span = document.createElement('span');
+                    span.className = 'ai-word inline-block';
+                    span.textContent = text;
+                    el.appendChild(span);
+                    
+                    el.classList.add('ai-processed', 'ai-active');
+                    return;
+                }
+                
+                // SPECIAL HANDLING FOR FAQ SUMMARIES
+                // If it's a summary or inside a summary, don't mess with the structure, just animate text
+                if (el.tagName === 'SUMMARY' || el.closest('summary')) {
+                    // Find the text node only
+                    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+                    let node;
+                    const textNodes = [];
+                    while(node = walker.nextNode()) {
+                        if(node.textContent.trim()) textNodes.push(node);
+                    }
+                    
+                    // Wrap text content in spans without destroying siblings (like icons)
+                    textNodes.forEach((textNode, index) => {
+                        const span = document.createElement('span');
+                        span.className = 'ai-word inline-block';
+                        span.textContent = textNode.textContent;
+                        span.style.setProperty('--ai-index', index);
+                        textNode.parentNode.replaceChild(span, textNode);
+                    });
+                    
+                    el.classList.add('ai-processed', 'ai-active');
+                    return;
+                }
+                
+                // Skip if it contains interactive elements or icons (unless handled above)
+                if (el.querySelector('i, input, button, svg, img')) return;
+
+                el.classList.add('ai-content', 'ai-processed');
+                const text = el.innerText;
+                el.innerHTML = '';
+
+                if (isHeading) {
+                    const chars = text.split('');
+                    chars.forEach((char, index) => {
+                        const span = document.createElement('span');
+                        span.textContent = char;
+                        span.className = 'ai-char';
+                        if (char === ' ') span.innerHTML = '&nbsp;';
+                        span.style.setProperty('--ai-index', index);
+                        el.appendChild(span);
+                    });
+                } else {
+                    const words = text.split(/(\s+)/); 
+                    let wordIndex = 0;
+                    words.forEach((word) => {
+                        if (word.trim().length === 0) {
+                            el.appendChild(document.createTextNode(word));
+                        } else {
+                            const span = document.createElement('span');
+                            span.textContent = word;
+                            span.className = 'ai-word';
+                            span.style.setProperty('--ai-index', wordIndex);
+                            el.appendChild(span);
+                            wordIndex++;
+                        }
+                    });
+                }
+            };
+
+            // Selectors to process
+            const selectors = [
+                'h1.ai-observe', 'h2.ai-observe', 'h3.ai-observe', 'p.ai-observe', 
+                'span.ai-observe:not(.text-gradient)',
+                '.accordion-btn span' // Explicitly target accordion button text
+            ];
+            
+            document.querySelectorAll(selectors.join(',')).forEach(el => {
+                if(el.offsetParent === null) return;
+                if(el.classList.contains('text-gradient')) {
+                    // Process gradient text differently - keep it as one element
+                    el.classList.add('ai-content', 'ai-processed', 'ai-active');
+                    return;
+                }
+                processTextElement(el);
+            });
+
+            // Intersection Observer using VelvetSound logic for timing/classes
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('ai-active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.ai-content, .ai-observe, .fade-up-block, .text-gradient').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+            // --- Accordion Logic ---
+            document.querySelectorAll('.accordion-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('i');
+                    
+                    if (content.classList.contains('open')) {
+                        content.style.maxHeight = '0px';
+                        content.classList.remove('open');
+                        if(icon) icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.classList.add('open');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        if(icon) icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            // --- Navbar Scroll Logic ---
+            let lastScrollY = window.scrollY;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > 50) {
+                    if (currentScrollY > lastScrollY) {
+                        navbar.style.transform = 'translateY(-10px)';
+                        navbar.style.opacity = '0.8';
+                        navbar.classList.add('backdrop-blur-none'); 
+                    } else {
+                        navbar.style.transform = 'translateY(0)';
+                        navbar.style.opacity = '1';
+                        navbar.classList.add('backdrop-blur-md');
+                    }
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                    navbar.style.opacity = '1';
+                }
+                lastScrollY = currentScrollY;
+            });
+
+            // --- Parallax Effect ---
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        const scrolled = window.scrollY;
+                        document.querySelectorAll('.parallax-effect').forEach(el => {
+                            const speed = el.getAttribute('data-parallax-speed') || 0.05;
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                                 el.style.transform = `translateY(${scrolled * speed}px)`;
+                            }
+                        });
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+        // Theme Toggle Functionality
+        (function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            const body = document.body;
+            const darkIcon = document.querySelector('.dark-icon');
+            const lightIcon = document.querySelector('.light-icon');
+            const darkIconMobile = document.querySelector('.dark-icon-mobile');
+            const lightIconMobile = document.querySelector('.light-icon-mobile');
+            
+            // Check for saved theme preference or default to dark
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            
+            // Function to update theme
+            function updateTheme(isLight) {
+                if (isLight) {
+                    body.classList.add('light');
+                    if (darkIcon) darkIcon.classList.remove('hidden');
+                    if (lightIcon) lightIcon.classList.add('hidden');
+                    if (darkIconMobile) darkIconMobile.classList.remove('hidden');
+                    if (lightIconMobile) lightIconMobile.classList.add('hidden');
+                } else {
+                    body.classList.remove('light');
+                    if (darkIcon) darkIcon.classList.add('hidden');
+                    if (lightIcon) lightIcon.classList.remove('hidden');
+                    if (darkIconMobile) darkIconMobile.classList.add('hidden');
+                    if (lightIconMobile) lightIconMobile.classList.remove('hidden');
+                }
+            }
+            
+            // Apply theme on load
+            updateTheme(currentTheme === 'light');
+            
+            // Toggle theme function
+            function toggleTheme() {
+                body.classList.toggle('light');
+                const isLight = body.classList.contains('light');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                updateTheme(isLight);
+                lucide.createIcons();
+            }
+            
+            // Add event listeners
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            if (themeToggleMobile) {
+                themeToggleMobile.addEventListener('click', toggleTheme);
+            }
+        })();
+    </script>
+
+</body></html>
